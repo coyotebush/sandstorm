@@ -260,13 +260,14 @@ isAdmin = function() {
   }
 }
 
-var wildcardHost = Meteor.settings.public.wildcardHost.split("*");
+var wildcardHost = Meteor.settings.public.wildcardHost.toLowerCase().split("*");
 
 matchWildcardHost = function(host) {
   // See if the hostname is a member of our wildcard. If so, extract the ID.
 
   var prefix = wildcardHost[0];
   var suffix = wildcardHost[1];
+  host = host.toLowerCase();
   if (host.lastIndexOf(prefix, 0) >= 0 &&
       host.indexOf(suffix, -suffix.length) >= 0 &&
       host.length >= prefix.length + suffix.length) {
